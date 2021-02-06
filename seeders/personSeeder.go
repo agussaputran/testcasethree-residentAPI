@@ -22,7 +22,17 @@ func SeedPerson(db *gorm.DB) {
 		{"8", "421", "Juminten", "Juminten", "", "1990-02-10", "Bekasi", "http://someplace.com/juminten.jpg", "F", "WIB"},
 		{"9", "754", "Irfan Sampurna", "Irfan", "Sampurna", "1988-04-12", "Bekasi", "http://someplace.com/irfan.jpg", "M", "WIB"},
 		{"15", "827", "Santi Resa", "Santi", "Resa", "1987-02-28", "Bogor", "http://someplace.com/santi.jpg", "F", "WIB"},
+		{"2", "632", "Farhan Ibrahim", "Farhan", "Ibrahim", "1992-03-08", "Bantul", "http://someplace.com/farhan.jpg", "M", "WIB"},
+		{"1", "740", "Josh Dun", "Josh", "Dun", "1997-03-08", "Bantul", "http://someplace.com/josh.jpg", "M", "WIB"},
+		{"8", "937", "Arman Iskandar", "Arman", "Iskandar", "1987-03-02", "Bekasi", "http://someplace.com/arman.jpg", "M", "WIB"},
 		{"1", "087", "Faruk Iskandar", "Faruk", "Iskandar", "1997-03-08", "Bantul", "http://someplace.com/faruk.jpg", "M", "WIB"},
+		{"7", "876", "Herman Adam", "Herman", "Adam", "1996-02-07", "Bantul", "http://someplace.com/herman.jpg", "M", "WIB"},
+		{"7", "653", "Geby Sinatra", "Geby", "Sinatra", "1998-02-02", "Bekasi", "http://someplace.com/faruk.jpg", "F", "WIB"},
+		{"8", "823", "Sinta Putri", "Sinta", "Putri", "1997-04-04", "Bantul", "http://someplace.com/sinta.jpg", "F", "WIB"},
+		{"2", "987", "Gery Fren", "Gery", "Fren", "1993-11-23", "Bantul", "http://someplace.com/gery.jpg", "M", "WIB"},
+		{"1", "836", "Abdul Karim", "Abdul", "Karim", "1996-06-06", "Bantul", "http://someplace.com/abdul.jpg", "M", "WIB"},
+		{"2", "429", "Dandi Firhan", "Dandi", "Firhan", "1992-10-12", "Bantul", "http://someplace.com/dandi.jpg", "M", "WIB"},
+		{"1", "938", "Dwi Putri", "Dwi", "Putri", "1991-11-21", "Bantul", "http://someplace.com/dwi.jpg", "F", "WIB"},
 	}
 
 	var person models.Persons
