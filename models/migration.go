@@ -23,6 +23,8 @@ func Migrations(db *gorm.DB) {
 	db.Migrator().DropTable(&SubDistricts{})
 	db.Migrator().DropTable(&Persons{})
 	db.Migrator().DropTable(&Users{})
+	db.Migrator().DropTable(&Offices{})
+	db.Migrator().DropTable(&OfficePersonLocations{})
 
 	checkProvinces = db.Migrator().HasTable(&Provinces{})
 	if !checkProvinces {
