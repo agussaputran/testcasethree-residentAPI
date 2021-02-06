@@ -1,9 +1,10 @@
-package models
+package seeders
 
 import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"testcasethree-residentAPI/models"
 	"testcasethree-residentAPI/service"
 
 	"gorm.io/gorm"
@@ -13,8 +14,8 @@ import (
 func SeedProvince(db *gorm.DB) {
 	resBody := service.FetchFromRajaongkir("/province")
 	var (
-		response RajaongkirProvince
-		prov     Provinces
+		response models.RajaongkirProvince
+		prov     models.Provinces
 	)
 
 	if err := json.Unmarshal(resBody, &response); err != nil {
