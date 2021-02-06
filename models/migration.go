@@ -9,11 +9,13 @@ import (
 // Migrations func
 func Migrations(db *gorm.DB) {
 	var (
-		checkProvinces    bool
-		checkDistricts    bool
-		checkSubDistricts bool
-		checkPersons      bool
-		checkUsers        bool
+		checkProvinces             bool
+		checkDistricts             bool
+		checkSubDistricts          bool
+		checkPersons               bool
+		checkUsers                 bool
+		checkOffices               bool
+		checkOfficePersonLocations bool
 	)
 
 	db.Migrator().DropTable(&Provinces{})
@@ -50,5 +52,17 @@ func Migrations(db *gorm.DB) {
 	if !checkUsers {
 		db.Migrator().CreateTable(&Users{})
 		fmt.Println("Create Users Table")
+	}
+
+	checkOffices = db.Migrator().HasTable(&Offices{})
+	if !checkOffices {
+		db.Migrator().CreateTable(&Offices{})
+		fmt.Println("Create Offices Table")
+	}
+
+	checkOfficePersonLocations = db.Migrator().HasTable(&OfficePersonLocations{})
+	if !checkOfficePersonLocations {
+		db.Migrator().CreateTable(&OfficePersonLocations{})
+		fmt.Println("Create OfficePersonLocations Table")
 	}
 }
