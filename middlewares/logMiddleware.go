@@ -12,6 +12,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// LogTerminalRequest for logging http request by terminal
+func LogTerminalRequest(c *gin.Context) {
+	reqMethod := c.Request.Method
+	reqPath := c.Request.URL.Path
+	log.Println(reqMethod, " -> ", reqPath)
+
+}
+
+// LogSentryRequest for logging request to senrty.io
+func LogSentryRequest(c *gin.Context) {
+	reqMethod := c.Request.Method
+	reqPath := c.Request.URL.Path
+	buf, _ := ioutil.ReadAll(c.Request.Body)
+	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(buf))
+	sentryMessage := string(reqMethod) + " -> " + reqPath + "\n" + string(buf)
+	Sentry(sentryMessage)
+}
+
 // LogTerminalUserRequest for logging user request to terminal
 func LogTerminalUserRequest(payload map[string]interface{}, c *gin.Context) {
 	reqMethod := c.Request.Method
