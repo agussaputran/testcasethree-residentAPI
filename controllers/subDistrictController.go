@@ -30,11 +30,11 @@ func (gorm *Gorm) PostCreateSubDistrict(c *gin.Context) {
 		result = gin.H{
 			"message": "success",
 			"data": map[string]interface{}{
-				"ID":          subDistrict.ID,
-				"province_id": subDistrict.DistrictID,
-				"subDistrict": subDistrict.Name,
-				"created_at":  subDistrict.CreatedAt,
-				"update_at":   subDistrict.UpdatedAt,
+				"id":           subDistrict.ID,
+				"district_id":  subDistrict.DistrictID,
+				"sub_district": subDistrict.Name,
+				"created_at":   subDistrict.CreatedAt,
+				"update_at":    subDistrict.UpdatedAt,
 			},
 		}
 		c.JSON(http.StatusOK, result)
@@ -80,7 +80,7 @@ func (gorm *Gorm) PatchUpdateSubDistrict(c *gin.Context) {
 		result = gin.H{
 			"message": "success",
 			"data": map[string]interface{}{
-				"province": subDistrict.Name,
+				"sub_district": subDistrict.Name,
 			},
 		}
 		c.JSON(http.StatusOK, result)
@@ -97,7 +97,7 @@ func (gorm *Gorm) DeleteRemoveSubDistrict(c *gin.Context) {
 	id := c.Query("id")
 	gorm.DB.Delete(&subDistrict, id)
 	result = gin.H{
-		"Message": "Success delete district",
+		"Message": "Success delete subDistrict",
 	}
 	c.JSON(http.StatusOK, result)
 }
