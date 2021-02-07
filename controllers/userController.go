@@ -13,7 +13,7 @@ import (
 )
 
 // LoginUser func
-func (strDB *StrDB) LoginUser(c *gin.Context) {
+func (gorm *Gorm) LoginUser(c *gin.Context) {
 	var (
 		user   models.Users
 		userDB models.Users
@@ -24,7 +24,7 @@ func (strDB *StrDB) LoginUser(c *gin.Context) {
 		log.Println("Data tidak ada, error : ", err.Error())
 	}
 
-	strDB.DB.Where("email = ?", user.Email).First(&userDB)
+	gorm.DB.Where("email = ?", user.Email).First(&userDB)
 
 	if err := bcrypt.CompareHashAndPassword([]byte(userDB.Password), []byte(user.Password)); err != nil {
 		log.Println("Email ", user.Email, " Password salah")
