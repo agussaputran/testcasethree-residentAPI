@@ -13,6 +13,9 @@ Simple REST API for resident
 ### ERD :
 ![alt text](https://github.com/agussaputran/testcasethree-residentAPI/blob/main/images/readme_image.png?raw=true)
 
+### API Documentation :
+<https://intip.in/PSZJ>
+
 ### Environment Variables :
 ```
 APP=
