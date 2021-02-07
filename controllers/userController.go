@@ -47,7 +47,7 @@ func (gorm *Gorm) LoginUser(c *gin.Context) {
 			},
 		}
 		sign := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), claims)
-		token, err := sign.SignedString([]byte(helper.GetEnvVar("SECRET_TOKEN")))
+		token, err := sign.SignedString([]byte(helper.GetEnvVar("JWT_SECRET")))
 		if err != nil {
 			log.Println("Gagal create token, message ", err.Error())
 			result = gin.H{

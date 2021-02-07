@@ -3,6 +3,7 @@ package route
 import (
 	"testcasethree-residentAPI/connection"
 	"testcasethree-residentAPI/controllers"
+	"testcasethree-residentAPI/middlewares"
 	"testcasethree-residentAPI/models"
 	"testcasethree-residentAPI/seeders"
 
@@ -28,38 +29,41 @@ func RouteHandler(app *gin.Engine) *gin.Engine {
 	seeders.SeedOfficePersonLocation(pgDB)
 	seeders.SeedUser(pgDB)
 
+	// Middleware
+	authMiddleware := middlewares.Auth
+
 	// Auth user
 	app.POST("/auth/login", gorm.LoginUser)
 
 	// Province CRUD Route
-	app.POST("/province", gorm.PostCreateProvince)
-	app.GET("/province", gorm.GetReadProvince)
-	app.PATCH("/province", gorm.PatchUpdateProvince)
-	app.DELETE("/province", gorm.DeleteRemoveProvince)
+	app.POST("/province", authMiddleware, gorm.PostCreateProvince)
+	app.GET("/province", gorm.GetReadProvince) // no auth | public route
+	app.PATCH("/province", authMiddleware, gorm.PatchUpdateProvince)
+	app.DELETE("/province", authMiddleware, gorm.DeleteRemoveProvince)
 
 	// District CRUD Route
-	app.POST("/district", gorm.PostCreateDistrict)
-	app.GET("/district", gorm.GetReadDistrict)
-	app.PATCH("/district", gorm.PatchUpdateDistrict)
-	app.DELETE("/district", gorm.DeleteRemoveDistrict)
+	app.POST("/district", authMiddleware, gorm.PostCreateDistrict)
+	app.GET("/district", gorm.GetReadDistrict) // no auth | public route
+	app.PATCH("/district", authMiddleware, gorm.PatchUpdateDistrict)
+	app.DELETE("/district", authMiddleware, gorm.DeleteRemoveDistrict)
 
 	// SubDistrict CRUD Route
-	app.POST("/subdistrict", gorm.PostCreateSubDistrict)
-	app.GET("/subdistrict", gorm.GetReadSubDistrict)
-	app.PATCH("/subdistrict", gorm.PatchUpdateSubDistrict)
-	app.DELETE("/subdistrict", gorm.DeleteRemoveSubDistrict)
+	app.POST("/subdistrict", authMiddleware, gorm.PostCreateSubDistrict)
+	app.GET("/subdistrict", gorm.GetReadSubDistrict) // no auth | public route
+	app.PATCH("/subdistrict", authMiddleware, gorm.PatchUpdateSubDistrict)
+	app.DELETE("/subdistrict", authMiddleware, gorm.DeleteRemoveSubDistrict)
 
 	// person CRUD Route
-	app.POST("/person", gorm.PostCreatePerson)
-	app.GET("/person", gorm.GetReadPerson)
-	app.PATCH("/person", gorm.PatchUpdatePerson)
-	app.DELETE("/person", gorm.DeleteRemovePerson)
+	app.POST("/person", authMiddleware, gorm.PostCreatePerson)
+	app.GET("/person", authMiddleware, gorm.GetReadPerson)
+	app.PATCH("/person", authMiddleware, gorm.PatchUpdatePerson)
+	app.DELETE("/person", authMiddleware, gorm.DeleteRemovePerson)
 
 	// office CRUD Route
-	app.POST("/office", gorm.PostCreateOffice)
-	app.GET("/office", gorm.GetReadOffice)
-	app.PATCH("/office", gorm.PatchUpdateOffice)
-	app.DELETE("/office", gorm.DeleteRemoveOffice)
+	app.POST("/office", authMiddleware, gorm.PostCreateOffice)
+	app.GET("/office", authMiddleware, gorm.GetReadOffice)
+	app.PATCH("/office", authMiddleware, gorm.PatchUpdateOffice)
+	app.DELETE("/office", authMiddleware, gorm.DeleteRemoveOffice)
 
 	return app
 }

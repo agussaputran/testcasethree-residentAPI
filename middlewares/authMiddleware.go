@@ -12,7 +12,7 @@ import (
 
 // Auth func
 func Auth(c *gin.Context) {
-	secret := helper.GetEnvVar("SECRET_TOKEN")
+	secret := helper.GetEnvVar("JWT_SECRET")
 	tokenStringHeader := c.Request.Header.Get("Authorization")
 	allowedMethod := c.Request.Method
 	token, err := jwt.Parse(tokenStringHeader, func(token *jwt.Token) (interface{}, error) {
@@ -30,14 +30,14 @@ func Auth(c *gin.Context) {
 			result := gin.H{
 				"message": "You can't access this route",
 			}
-			LogSentryUserRequest(payload, c)
+			LogTerminalUserRequest(payload, c)
 			c.Abort()
 			c.JSON(http.StatusUnauthorized, result)
 		} else if payload["role"] == "entry" && allowedMethod == "DELETE" {
 			result := gin.H{
 				"message": "You can't access this route",
 			}
-			LogSentryUserRequest(payload, c)
+			LogTerminalUserRequest(payload, c)
 			c.Abort()
 			c.JSON(http.StatusUnauthorized, result)
 		} else {
