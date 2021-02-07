@@ -42,7 +42,7 @@ func (gorm *Gorm) LoginUser(c *gin.Context) {
 			userDB.Email,
 			userDB.Role,
 			jwt.StandardClaims{
-				ExpiresAt: time.Now().Add(time.Hour * 48).Unix(),
+				ExpiresAt: time.Now().Add(time.Minute * 15).Unix(),
 				IssuedAt:  time.Now().Unix(),
 			},
 		}
