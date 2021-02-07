@@ -28,6 +28,9 @@ func RouteHandler(app *gin.Engine) *gin.Engine {
 	seeders.SeedOfficePersonLocation(pgDB)
 	seeders.SeedUser(pgDB)
 
+	// Auth user
+	app.POST("/auth/login", gorm.LoginUser)
+
 	// Province CRUD Route
 	app.POST("/province", gorm.PostCreateProvince)
 	app.GET("/province", gorm.GetReadProvince)
