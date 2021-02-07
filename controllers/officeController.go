@@ -48,7 +48,7 @@ func (gorm *Gorm) GetReadOffice(c *gin.Context) {
 		result   gin.H
 	)
 
-	gorm.DB.Model(&office).Select("offices.id, offices.name as office, sub_districts.name as subdistrict").Joins("left join sub_districts on sub_districts.id = offices.sub_district_id").Scan(&response)
+	gorm.DB.Model(&office).Select("offices.id, offices.name as office, sub_districts.name as sub_district").Joins("left join sub_districts on sub_districts.id = offices.sub_district_id").Scan(&response)
 	if length := len(response); length <= 0 {
 		result = helper.ResultAPINilResponse(response, length)
 	} else {
