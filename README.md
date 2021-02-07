@@ -10,6 +10,9 @@ Simple REST API for resident
 - Sentry
 - Fetch API from rajaongkir.com for Province and City data
 
+### ERD :
+![alt text](https://github.com/agussaputran/testcasethree-residentAPI/blob/main/images/readme_image.png?raw=true)
+
 ### Environment Variables :
 ```
 APP=
