@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"net/http"
+	"testcasethree-residentAPI/helper"
 	"testcasethree-residentAPI/models"
 
 	"github.com/gin-gonic/gin"
@@ -47,9 +48,9 @@ func (gorm *Gorm) GetReadProvince(c *gin.Context) {
 
 	gorm.DB.Preload("District").Preload("District.SubDistrict").Preload("District.SubDistrict.Person").Find(&province)
 	if length := len(province); length <= 0 {
-		result = ResultAPINilResponse(province, length)
+		result = helper.ResultAPINilResponse(province, length)
 	} else {
-		result = ResultAPIResponse(province, length)
+		result = helper.ResultAPIResponse(province, length)
 	}
 
 	c.JSON(http.StatusOK, result)
