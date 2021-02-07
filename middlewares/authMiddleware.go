@@ -30,14 +30,14 @@ func Auth(c *gin.Context) {
 			result := gin.H{
 				"message": "You can't access this route",
 			}
-			LogTerminalUserRequest(payload, c)
+			LogSentryUserRequest(payload, c)
 			c.Abort()
 			c.JSON(http.StatusUnauthorized, result)
 		} else if payload["role"] == "entry" && allowedMethod == "DELETE" {
 			result := gin.H{
 				"message": "You can't access this route",
 			}
-			LogTerminalUserRequest(payload, c)
+			LogSentryUserRequest(payload, c)
 			c.Abort()
 			c.JSON(http.StatusUnauthorized, result)
 		} else {
