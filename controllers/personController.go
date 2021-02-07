@@ -11,9 +11,8 @@ import (
 
 type personResponse struct {
 	ID uint
-	FullName, FirstName, LastName, BirthDate,
-	BirthPlace, PhotoProfileUrl, Gender, ZoneLocation, Subdistrict,
-	District, Province string
+	Nip, FullName, FirstName, LastName, BirthDate,
+	BirthPlace, PhotoProfileUrl, Gender, ZoneLocation, SubDistrict string
 }
 
 // PostCreatePerson route struct method
@@ -57,12 +56,11 @@ func (gorm *Gorm) GetReadPerson(c *gin.Context) {
 		result   gin.H
 	)
 
-	gorm.DB.Model(&person).Select(`persons.id, persons.full_name, persons.first_name,
-	persons.last_name, persons.birth_date, persons.birth_place, person.photo_profile_url,
-	persons.gender, persons.zone_location, sub_districts.name as subdistrict,
-	districts.name as district, provinces.name as province`).Joins(`left join sub_districts
-	on sub_districts.id = persons.sub_district_id left join districts on districts.id =
-	sub_districts.district_id left join provinces on provinces.id = districts.province_id`).Scan(&response)
+	gorm.DB.Model(&person).Select(`persons.id, persons.nip, persons.full_name, persons.first_name,
+	persons.last_name, persons.birth_date, persons.birth_place, persons.photo_profile_url,
+	persons.gender, persons.zone_location, sub_districts.name as sub_district`).
+		Joins(`left join sub_districts on sub_districts.id = persons.sub_district_id`).
+		Scan(&response)
 	if length := len(response); length <= 0 {
 		result = helper.ResultAPINilResponse(response, length)
 	} else {
