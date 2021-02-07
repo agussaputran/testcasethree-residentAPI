@@ -74,7 +74,7 @@ func (gorm *Gorm) PatchUpdateDistrict(c *gin.Context) {
 		result = gin.H{
 			"message": "success",
 			"data": map[string]interface{}{
-				"province": district.Name,
+				"district": district.Name,
 			},
 		}
 		c.JSON(http.StatusOK, result)
