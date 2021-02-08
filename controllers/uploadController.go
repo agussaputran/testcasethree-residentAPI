@@ -19,6 +19,19 @@ func (gorm *Gorm) UploadSingle(c *gin.Context) {
 	)
 
 	file, _ := c.FormFile("photo")
+
+	if file.Size > 200000 || file.Header["Content-Type"][0] != "image/png" {
+		c.JSON(400, gin.H{
+			"message": "uploaded file size is too large or not a valid image format jpg/png",
+		})
+		return
+	} else if file.Header["Content-Type"][0] != "image/jpg" {
+		c.JSON(400, gin.H{
+			"message": "uploaded file size is too large or not a valid image format jpg/png",
+		})
+		return
+	}
+
 	id := c.Query("id")
 
 	reg, err := regexp.Compile("[^a-zA-Z.]+")
