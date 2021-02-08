@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"testcasethree-residentAPI/helper"
 	"testcasethree-residentAPI/models"
 
 	"github.com/gin-gonic/gin"
@@ -56,4 +57,21 @@ func (gorm *Gorm) ReportPersonByGender(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, result)
 	}
 
+}
+
+// ReportPersonOffice func route
+func (gorm *Gorm) ReportPersonOffice(c *gin.Context) {
+	var (
+		person []models.Persons
+		result gin.H
+	)
+
+	gorm.DB.Preload("OfficePersonLocation").Find(&person)
+	if length := len(person); length <= 0 {
+		result = helper.ResultAPINilResponse(person, length)
+	} else {
+		result = helper.ResultAPIResponse(person, length)
+	}
+
+	c.JSON(http.StatusOK, result)
 }

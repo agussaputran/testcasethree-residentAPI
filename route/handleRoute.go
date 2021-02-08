@@ -69,7 +69,8 @@ func RouteHandler(app *gin.Engine) *gin.Engine {
 	app.DELETE("/office", authMiddleware, gorm.DeleteRemoveOffice)
 
 	// report get route
-	app.GET("/report", authMiddleware, gorm.ReportPersonByGender)
+	app.GET("/report/person/count", authMiddleware, gorm.ReportPersonByGender)
+	app.GET("/report/person/office", gorm.ReportPersonOffice)
 
 	return app
 }
