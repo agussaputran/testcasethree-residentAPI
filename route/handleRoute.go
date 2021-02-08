@@ -68,5 +68,8 @@ func RouteHandler(app *gin.Engine) *gin.Engine {
 	app.PATCH("/office", authMiddleware, gorm.PatchUpdateOffice)
 	app.DELETE("/office", authMiddleware, gorm.DeleteRemoveOffice)
 
+	// report get route
+	app.GET("/report", gorm.ReportPersonByGender)
+
 	return app
 }
