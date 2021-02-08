@@ -36,7 +36,7 @@ func RouteHandler(app *gin.Engine) *gin.Engine {
 	app.POST("/auth/login", gorm.LoginUser)
 
 	// Upload
-	app.POST("/person/photo", authMiddleware, gorm.UploadSingle)
+	app.PATCH("/person/photo", authMiddleware, gorm.UploadSingle)
 
 	// Province CRUD Route
 	app.POST("/province", authMiddleware, gorm.PostCreateProvince)
