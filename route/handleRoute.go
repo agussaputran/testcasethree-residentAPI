@@ -71,6 +71,7 @@ func RouteHandler(app *gin.Engine) *gin.Engine {
 	// report get route
 	app.GET("/report/person/count", authMiddleware, gorm.ReportPersonByGender)
 	app.GET("/report/person/office", gorm.ReportPersonOffice)
+	app.GET("/report/person/office/count", gorm.ReportCountPersonOfficeByGender)
 
 	return app
 }
