@@ -120,6 +120,8 @@ func (gorm *Gorm) ReportPersonOffice(c *gin.Context) {
 		}
 	}
 
+	_, _ = conn.Do("EXPIRE", "report_response", "120")
+
 	if length := len(resp); length <= 0 {
 		result = helper.ResultAPINilResponse(resp, length)
 	} else {
