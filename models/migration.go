@@ -16,6 +16,7 @@ func Migrations(db *gorm.DB) {
 		checkUsers                 bool
 		checkOffices               bool
 		checkOfficePersonLocations bool
+		checkQueue                 bool
 	)
 
 	db.Migrator().DropTable(&Provinces{})
@@ -66,5 +67,11 @@ func Migrations(db *gorm.DB) {
 	if !checkOfficePersonLocations {
 		db.Migrator().CreateTable(&OfficePersonLocations{})
 		fmt.Println("Create OfficePersonLocations Table")
+	}
+
+	checkQueue = db.Migrator().HasTable(&QueueEmail{})
+	if !checkQueue {
+		db.Migrator().CreateTable(&QueueEmail{})
+		fmt.Println("Create QueueEmail Table")
 	}
 }
