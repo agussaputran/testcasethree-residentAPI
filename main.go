@@ -10,7 +10,7 @@ import (
 
 // RunCron func
 func RunCron() {
-	gocron.Every(5).Seconds().Do(others.CheckQueue)
+	gocron.Every(10).Seconds().Do(others.CheckQueue)
 	<-gocron.Start()
 }
 

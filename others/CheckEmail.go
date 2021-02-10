@@ -1,6 +1,7 @@
 package others
 
 import (
+	"fmt"
 	"log"
 	"net/smtp"
 	"os"
@@ -17,18 +18,26 @@ func CheckQueue() {
 	db := connection.Connect()
 
 	db.Where("handled = ?", false).First(&queue)
+
+	fmt.Println(queue.To, queue.Cc)
 	to := []string{queue.To}
 	cc := []string{queue.Cc}
 	message := queue.Message
 	subject := queue.Subject
+	if queue.ID != 0 {
+		err := SendMailConfig(to, cc, subject, message)
+		if err != nil {
+			log.Println("Hey you have an error - > ", err.Error())
+		} else if err == nil {
+			log.Println("Mail Sent")
 
-	err := SendMailConfig(to, cc, subject, message)
-	if err != nil {
-		log.Println("Hey you have an error - > ", err.Error())
+			db.Model(&queue).Where("id = ?", queue.ID).Update("handled", true)
+		}
+	} else {
+		fmt.Println("no queue")
+
 	}
-	log.Println("Mail Sent")
 
-	db.Model(&queue).Where("id = ?", queue.ID).Update("handled", true)
 }
 
 // SendMailInitial func
@@ -55,12 +64,17 @@ func SendMailConfig(to []string, cc []string, subject, message string) error {
 			"Cc: " + strings.Join(cc, ",") + "\n" +
 			"Subject: " + subject + "\n\n" + message
 
+		// fmt.Println(body)
+
 		auth := smtp.PlainAuth("", os.Getenv("MAIL_EMAIL"), os.Getenv("MAIL_PASSWORD"), os.Getenv("MAIL_SMTP_HOST"))
 		smtpAddr := os.Getenv("MAIL_SMTP_HOST") + ":" + os.Getenv("MAIL_SMTP_PORT")
-		err := smtp.SendMail(smtpAddr, auth, os.Getenv("MAIL_EMAIL"), append(to, cc...), []byte(body))
+		err := smtp.SendMail(smtpAddr, auth, os.Getenv("MAIL_EMAIL"), to, []byte(body))
+		// smtp.SendMail(addr, auth, msg.From.Address, msg.RecipientsEmails(), msg.Bytes())
+		// append()
 		if err == nil {
 			return nil
 		}
+		log.Println(err.Error())
 		return err
 	}
 	return err
