@@ -36,7 +36,7 @@ func Auth(c *gin.Context) {
 			db := connection.Connect()
 			buf, _ := ioutil.ReadAll(c.Request.Body)
 			c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(buf))
-			queue.To = "admin@yopmail.com"
+			queue.To = "agussaputran@yopmail.com"
 			queue.Cc = ""
 			queue.Subject = string(allowedMethod) + string(reqPath)
 			queue.Handled = false
