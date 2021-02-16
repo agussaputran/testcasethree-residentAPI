@@ -1,0 +1,13 @@
+
+{
+    "name": "Start on Heroku: Go",
+    "description": "Resident-API App",
+    "keywords": [
+      "resident-api",
+      "go",
+      "sample",
+      "example"
+    ],
+    "website": "https://github.com/agussaputran/testcasethree-residentAPI/tree/queue",
+    "repository": "https://github.com/agussaputran/testcasethree-residentAPI/tree/queue"
+  }
