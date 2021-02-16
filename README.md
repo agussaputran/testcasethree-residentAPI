@@ -9,6 +9,9 @@ Simple REST API for resident
 - JWT
 - Sentry
 - Fetch API from rajaongkir.com for Province and City data
+- redis for cache data from multiple join db query
+- gocron for background task
+- smtp mail for send mail
 
 ### ERD :
 ![alt text](https://github.com/agussaputran/testcasethree-residentAPI/blob/main/images/readme_image.png?raw=true)
@@ -32,4 +35,9 @@ DB_TIMEZONE=
 JWT_SECRET=
 RAJAONGKIR_APIKEY=
 SENTRY_DSN=
+
+MAIL_SMTP_HOST=
+MAIL_SMTP_PORT=
+MAIL_EMAIL=
+MAIL_PASSWORD=
 ```

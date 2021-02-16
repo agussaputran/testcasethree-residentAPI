@@ -44,6 +44,7 @@ func (gorm *Gorm) PostCreatePerson(c *gin.Context) {
 				"update_at":       person.UpdatedAt,
 			},
 		}
+		helper.DelRedisCache()
 		c.JSON(http.StatusOK, result)
 	}
 }
@@ -97,6 +98,8 @@ func (gorm *Gorm) PatchUpdatePerson(c *gin.Context) {
 				"zoneLocation":    person.ZoneLocation,
 			},
 		}
+
+		helper.DelRedisCache()
 		c.JSON(http.StatusOK, result)
 	}
 }
@@ -113,5 +116,6 @@ func (gorm *Gorm) DeleteRemovePerson(c *gin.Context) {
 	result = gin.H{
 		"Message": "Success delete person",
 	}
+	helper.DelRedisCache()
 	c.JSON(http.StatusOK, result)
 }
